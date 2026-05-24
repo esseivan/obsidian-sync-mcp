@@ -28,6 +28,10 @@ const COUCHDB_PASSWORD = process.env.COUCHDB_PASSWORD;
 const COUCHDB_DATABASE = process.env.COUCHDB_DATABASE ?? "obsidian";
 const COUCHDB_PASSPHRASE = process.env.COUCHDB_PASSPHRASE || undefined;
 const COUCHDB_OBFUSCATE_PROPERTIES = process.env.COUCHDB_OBFUSCATE_PROPERTIES === "true";
+const LIVESYNC_CHUNK_SIZE = process.env.LIVESYNC_CHUNK_SIZE ? parseInt(process.env.LIVESYNC_CHUNK_SIZE) : undefined;
+const LIVESYNC_MINIMUM_CHUNK_SIZE = process.env.LIVESYNC_MINIMUM_CHUNK_SIZE ? parseInt(process.env.LIVESYNC_MINIMUM_CHUNK_SIZE) : undefined;
+const LIVESYNC_HASH_ALG = process.env.LIVESYNC_HASH_ALG;
+const LIVESYNC_CHUNK_SPLITTER_VERSION = process.env.LIVESYNC_CHUNK_SPLITTER_VERSION;
 const VAULT_NAME = process.env.VAULT_NAME ?? "MyVault";
 const PORT = parseInt(process.env.PORT ?? "8787");
 const BASE_URL = process.env.BASE_URL ?? `http://localhost:${PORT}`;
@@ -56,6 +60,10 @@ if (VAULT_PATH) {
         database: COUCHDB_DATABASE,
         passphrase: COUCHDB_PASSPHRASE,
         obfuscatePaths: COUCHDB_OBFUSCATE_PROPERTIES,
+        customChunkSize: LIVESYNC_CHUNK_SIZE,
+        minimumChunkSize: LIVESYNC_MINIMUM_CHUNK_SIZE,
+        hashAlg: LIVESYNC_HASH_ALG as any,
+        chunkSplitterVersion: LIVESYNC_CHUNK_SPLITTER_VERSION as any,
     });
     console.log(`Remote mode: ${COUCHDB_URL}`);
 } else {

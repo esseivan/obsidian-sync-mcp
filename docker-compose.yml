@@ -4,6 +4,12 @@
 #   MCP_AUTH_TOKEN=<password-for-mcp>
 #   LIVESYNC_USER=livesync          (optional, recommended)
 #   LIVESYNC_PASSWORD=<password>    (optional, recommended)
+#
+# Chunking must match your LiveSync plugin settings (Settings > Sync Settings > Advanced):
+#   LIVESYNC_CHUNK_SIZE=0           (customChunkSize, default 0 = 100 KB max per chunk)
+#   LIVESYNC_MINIMUM_CHUNK_SIZE=20  (minimumChunkSize)
+#   LIVESYNC_HASH_ALG=xxhash64      (hashAlg)
+#   LIVESYNC_CHUNK_SPLITTER_VERSION=v3-rabin-karp  (chunkSplitterVersion)
 
 services:
   couchdb:
@@ -29,6 +35,10 @@ services:
       VAULT_NAME: ${VAULT_NAME:-MyVault}
       MCP_AUTH_TOKEN: ${MCP_AUTH_TOKEN:-}
       BASE_URL: ${BASE_URL:-http://localhost:8787}
+      LIVESYNC_CHUNK_SIZE: ${LIVESYNC_CHUNK_SIZE:-}
+      LIVESYNC_MINIMUM_CHUNK_SIZE: ${LIVESYNC_MINIMUM_CHUNK_SIZE:-}
+      LIVESYNC_HASH_ALG: ${LIVESYNC_HASH_ALG:-}
+      LIVESYNC_CHUNK_SPLITTER_VERSION: ${LIVESYNC_CHUNK_SPLITTER_VERSION:-}
     depends_on:
       - couchdb
 

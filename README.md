@@ -247,6 +247,10 @@ Without `MCP_AUTH_TOKEN`, the server runs without authentication — suitable fo
 | `COUCHDB_DATABASE` | CouchDB mode | `obsidian` | CouchDB database name |
 | `COUCHDB_PASSPHRASE` | CouchDB mode | — | LiveSync E2E encryption passphrase (must match plugin setting) |
 | `COUCHDB_OBFUSCATE_PROPERTIES` | CouchDB mode | `false` | Set to `true` if "Obfuscate Properties" is enabled in LiveSync (obfuscates file paths, sizes, dates in the database) |
+| `LIVESYNC_CHUNK_SIZE` | CouchDB mode | `0` | Must match "Custom chunk size" in LiveSync sync settings (e.g. `60`). Controls the maximum chunk size multiplier for writes. |
+| `LIVESYNC_MINIMUM_CHUNK_SIZE` | CouchDB mode | `20` | Must match "Minimum chunk size" in LiveSync sync settings. |
+| `LIVESYNC_HASH_ALG` | CouchDB mode | `xxhash64` | Hash algorithm for chunk IDs. Must match LiveSync sync settings (`xxhash64` or `sha1`). |
+| `LIVESYNC_CHUNK_SPLITTER_VERSION` | CouchDB mode | `v3-rabin-karp` | Chunk splitting algorithm. Must match LiveSync sync settings (`v1`, `v2`, `v2-segmenter`, or `v3-rabin-karp`). |
 | `VAULT_NAME` | Both | `MyVault` | Vault name (used for deep links and index storage) |
 | `MCP_AUTH_TOKEN` | Optional | — | Password for authentication |
 | `BASE_URL` | Optional | `http://localhost:PORT` | Public URL (for OAuth callbacks when using a tunnel) |

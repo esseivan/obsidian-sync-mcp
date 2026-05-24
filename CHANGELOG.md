@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Fixes
+- Fix write corruption: `doNotUseFixedRevisionForChunks` was incorrectly hardcoded to `false`, causing chunk revision mismatches that made LiveSync clients report written files as corrupted. Now uses the library default (`true`), matching standard LiveSync configuration.
+- Add `LIVESYNC_CHUNK_SIZE`, `LIVESYNC_MINIMUM_CHUNK_SIZE`, `LIVESYNC_HASH_ALG`, and `LIVESYNC_CHUNK_SPLITTER_VERSION` environment variables to let the MCP server's chunking parameters match the vault's LiveSync plugin settings exactly. Mismatch between these settings was the root cause of "file seems to be corrupted" errors after writes.
+
 ## 0.5.3
 
 ### Features

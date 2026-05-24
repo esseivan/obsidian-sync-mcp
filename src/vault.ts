@@ -5,7 +5,7 @@
 import { DirectFileManipulator } from "../lib/livesync-commonlib/src/API/DirectFileManipulator.ts";
 import type { DirectFileManipulatorOptions } from "../lib/livesync-commonlib/src/API/DirectFileManipulator.ts";
 import { createTextBlob } from "../lib/livesync-commonlib/src/common/utils.ts";
-import type { FilePathWithPrefix } from "../lib/livesync-commonlib/src/common/types.ts";
+import type { FilePathWithPrefix, HashAlgorithm, ChunkSplitterVersion } from "../lib/livesync-commonlib/src/common/types.ts";
 import type { MetaEntry } from "../lib/livesync-commonlib/src/API/DirectFileManipulatorV2.ts";
 import { isPathProbablyObfuscated, decrypt } from "octagonal-wheels/encryption/encryption";
 import { clearHandlers } from "../lib/livesync-commonlib/src/replication/SyncParamsHandler.ts";
@@ -19,6 +19,10 @@ export interface VaultConfig {
     database: string;
     passphrase?: string;
     obfuscatePaths?: boolean;
+    customChunkSize?: number;
+    minimumChunkSize?: number;
+    hashAlg?: HashAlgorithm;
+    chunkSplitterVersion?: ChunkSplitterVersion;
 }
 
 export class Vault implements VaultBackend {
@@ -37,7 +41,10 @@ export class Vault implements VaultBackend {
             useEden: false,
             enableCompression: false,
             handleFilenameCaseSensitive: false,
-            doNotUseFixedRevisionForChunks: false,
+            customChunkSize: config.customChunkSize,
+            minimumChunkSize: config.minimumChunkSize,
+            hashAlg: config.hashAlg,
+            chunkSplitterVersion: config.chunkSplitterVersion,
         };
         this.manipulator = new DirectFileManipulator(opts);
     }
