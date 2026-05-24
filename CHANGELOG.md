@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.5.4
 
 ### Fixes
 - Fix write corruption: `doNotUseFixedRevisionForChunks` was incorrectly hardcoded to `false`, causing chunk revision mismatches that made LiveSync clients report written files as corrupted. Now uses the library default (`true`), matching standard LiveSync configuration.
